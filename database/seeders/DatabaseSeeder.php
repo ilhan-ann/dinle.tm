@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\User;
-use App\Models\Song;
 use App\Models\Video;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -23,8 +22,8 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         $this->call(CategorySeeder::class);
-        $this->call(ArtistSeeder::class);
-        Song::factory(50)->create();
+        $this->call(ArtistSeeder::class); 
+        $this->call(SongSeeder::class); 
         Video::factory(50)->create();
     }
 }

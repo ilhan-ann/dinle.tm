@@ -8,8 +8,9 @@
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/bootstrap-icons.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-    <link rel="stylesheet" href="{{ asset('img/bg-image.jpg') }}">
+    <link rel="stylesheet" href="{{ asset('css/splide.min.css') }}">
     <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('js/splide.min.js') }}"></script>
 </head>
 
 <body>
