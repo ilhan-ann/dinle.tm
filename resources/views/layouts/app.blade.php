@@ -15,5 +15,6 @@
 
 <body>
     @include('layouts.nav')
+    @include('layouts.player')
     @yield('content')
 </body>

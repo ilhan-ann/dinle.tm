@@ -12,7 +12,7 @@ class HomeController extends Controller
     public function index()
     {
          $categories = Category::get();
-         $songs = Song::take(8);
+         $songs = Song::get();
 
         return view('home.index')->with([
             'categories' => $categories,

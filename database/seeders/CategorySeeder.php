@@ -17,7 +17,6 @@ class CategorySeeder extends Seeder
             'Turkmen',
             'Russian',
             'Foreign',
-            'Artists',
         ];
 
         foreach ($categories as $category) {

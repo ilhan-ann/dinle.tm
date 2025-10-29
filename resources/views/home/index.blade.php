@@ -8,49 +8,56 @@
             </div>
             <div class="col-9">
                 <div class="row row-cols-1 g-3">
-                     <section id="banner" class="splide mt-5" aria-label="meals">
-                    <div class="splide__track">
-                        <ul class="splide__list">
-                            <li class="splide__slide">
-                                <img src="{{ asset('img/Screenshot 2025-07-13 125508.png') }} " class="img-fluid rounded-4" alt="">
-                            </li>
-                            <li class="splide__slide">
-                                <img src="{{ asset('img/Screenshot 2025-07-13 125529.png') }} " class="img-fluid rounded-4" alt="">
-                            </li>
-                            <li class="splide__slide">
-                               <img src="{{ asset('img/Screenshot 2025-07-13 125535.png') }} " class="img-fluid rounded-4" alt="">
-                            </li>
-                            <li class="splide__slide">
-                                <img src="{{ asset('img/Screenshot 2025-07-17 151658.png') }} " class="img-fluid rounded-4" alt="">
-                            </li>
-                            <li class="splide__slide">
-                               <img src="{{ asset('img/Screenshot 2025-07-17 151249.png') }} " class="img-fluid rounded-4" alt="">
-                            </li>
-                            <li class="splide__slide">
-                               <img src="{{ asset('img/Screenshot 2025-07-17 151257.png') }} " class="img-fluid rounded-4" alt="">
-                            </li>
-                        </ul>
-                    </div>
-                </section>
+                    <section id="banner" class="splide mt-5" aria-label="meals">
+                        <div class="splide__track">
+                            <ul class="splide__list">
+                                <li class="splide__slide">
+                                    <img src="{{ asset('img/Screenshot 2025-07-13 125508.png') }} "
+                                        class="img-fluid rounded-4" alt="">
+                                </li>
+                                <li class="splide__slide">
+                                    <img src="{{ asset('img/Screenshot 2025-07-13 125529.png') }} "
+                                        class="img-fluid rounded-4" alt="">
+                                </li>
+                                <li class="splide__slide">
+                                    <img src="{{ asset('img/Screenshot 2025-07-13 125535.png') }} "
+                                        class="img-fluid rounded-4" alt="">
+                                </li>
+                                <li class="splide__slide">
+                                    <img src="{{ asset('img/Screenshot 2025-07-17 151658.png') }} "
+                                        class="img-fluid rounded-4" alt="">
+                                </li>
+                                <li class="splide__slide">
+                                    <img src="{{ asset('img/Screenshot 2025-07-17 151249.png') }} "
+                                        class="img-fluid rounded-4" alt="">
+                                </li>
+                                <li class="splide__slide">
+                                    <img src="{{ asset('img/Screenshot 2025-07-17 151257.png') }} "
+                                        class="img-fluid rounded-4" alt="">
+                                </li>
+                            </ul>
+                        </div>
+                    </section>
                     @foreach ($categories as $category)
                         <div class="col">
-                            <a href="{{ route('categories.show', $category->id) }}" class="text-decoration-none text-black">
                             <div class="border rounded-4 h-100 p-4 glass">
-                                <div class="h5">
-                                    {{ $category->name}}
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="h5">
+                                        {{ $category->name}}
+                                    </div>
+                                    <div>
+                                        <a href="{{ route('categories.show', $category->id) }}"
+                                        class="text-decoration-none text-black"><i class="bi bi-chevron-right"></i></a>
+                                    </div>
                                 </div>
                             </div>
-                            </a>
                         </div>
                     @endforeach
                 </div>
             </div>
-            <div>
-                @include('layouts.player')
-            </div>
         </div>
     </div>
-     <script>
+    <script>
         document.addEventListener('DOMContentLoaded', function () {
             var splide = new Splide('#banner', {
                 type: 'loop',
