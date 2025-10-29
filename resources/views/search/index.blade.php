@@ -16,6 +16,9 @@
                         <a href="{{ route('search') }}" class="btn glass btn-glass border text-black ms-2 w-100">Reset</a>
                     </div>
                 </form>
+                <div>
+                    {{ $songs->links('pagination::bootstrap-5') }}
+                </div>
                 @foreach ($songs as $song)
                     <div class="col">
                         <div class="border rounded-4 p-1 px-2 glass d-flex mt-2 justify-content-between align-items-center">
@@ -43,9 +46,5 @@
                 @endforeach
             </div>
         </div>
-    </div>
-    <div class="mt-4">
-        {{ $songs->links('pagination::bootstrap-5') }}
-    </div>
     </div>
 @endsection

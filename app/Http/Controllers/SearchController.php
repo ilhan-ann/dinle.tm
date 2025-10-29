@@ -40,7 +40,7 @@ class SearchController extends Controller
                 return $query->where('artist_id', $f_artist);
             })
             ->orderBy('created_at', 'desc')
-            ->paginate(10)
+            ->paginate(15)
             ->withQueryString();
 
 

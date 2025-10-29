@@ -17,12 +17,11 @@ class ArtistSeeder extends Seeder
             'Dali Dade',
             'CITI3EN',
             'Swizzy347',
-            'S Beater',
             'Abdy Dayy',
-            'Eminem',
-            'Егор Крид',
+            'XXXtentacion',
             'The Weeknd',
             'Taze Yuz',
+            'Miyagi',
         ];
 
         foreach ($artists as $artist) {

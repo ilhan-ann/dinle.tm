@@ -24,7 +24,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call(CategorySeeder::class);
         $this->call(ArtistSeeder::class);    
-        $this->call(SongSeeder::class);    
-        Video::factory(50)->create();
+        $this->call(SongSeeder::class);
+        $this->call(VideoSeeder::class);
     }
 }

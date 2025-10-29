@@ -11,13 +11,13 @@
                     <span>/</span>
                     <small id="player-duration">0:00</small>
                     <div class="rounded-4">
-                        <button id="player-prev-btn" class="btn btn-glass glass text-black rounded-4">
+                        <button id="player-prev-btn" class="btn btn-glass glass text-black rounded-circle">
                             <i class="bi bi-skip-start-fill"></i>
                         </button>
-                        <button id="player-play-btn" class="btn btn-glass glass text-black rounded-4">
+                        <button id="player-play-btn" class="btn btn-glass glass text-black rounded-circle">
                             <i class="bi bi-play-fill"></i>
                         </button>
-                        <button id="player-next-btn" class="btn btn-glass glass text-black rounded-4">
+                        <button id="player-next-btn" class="btn btn-glass glass text-black rounded-circle">
                             <i class="bi bi-skip-end-fill"></i>
                         </button>
                     </div>
@@ -148,15 +148,15 @@
 </script>
 
 <script>
-document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('.song-duration').forEach(el => {
-        const audio = new Audio(el.dataset.src);
-        audio.addEventListener('loadedmetadata', () => {
-            const d = audio.duration;
-            const minutes = Math.floor(d / 60);
-            const seconds = Math.floor(d % 60).toString().padStart(2, '0');
-            el.innerHTML = `<i class="bi bi-clock me-1"></i> ${minutes}:${seconds}`;
+    document.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('.song-duration').forEach(el => {
+            const audio = new Audio(el.dataset.src);
+            audio.addEventListener('loadedmetadata', () => {
+                const d = audio.duration;
+                const minutes = Math.floor(d / 60);
+                const seconds = Math.floor(d % 60).toString().padStart(2, '0');
+                el.innerHTML = `<i class="bi bi-clock me-1"></i> ${minutes}:${seconds}`;
+            });
         });
     });
-});
 </script>

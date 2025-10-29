@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="{{ asset('css/splide.min.css') }}">
     <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('js/splide.min.js') }}"></script>
+    <script src="{{ asset('js/typed.js') }}"></script>
 </head>
 
 <body>
