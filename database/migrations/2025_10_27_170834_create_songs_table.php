@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('audio_path')->nullable();
-            $table->string('duration')->nullable();
             $table->foreignId('artist_id')->constrained()->cascadeOnDelete();
             $table->foreignId('category_id')->constrained()->cascadeOnDelete();
             $table->integer('listener_count')->default(0);

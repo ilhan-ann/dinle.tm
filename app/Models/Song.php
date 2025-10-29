@@ -17,4 +17,14 @@ class Song extends Model
     {
         return $this->belongsTo(Category::class);
     }
+
+    protected $fillable = [
+        'name',
+        'artist',
+        'audio_path',
+        'artist_id',
+        'category_id',
+        'listener_count',
+    ];
+
 }
