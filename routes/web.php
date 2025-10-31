@@ -6,17 +6,34 @@ use App\Http\Controllers\VideoController;
 use App\Http\Controllers\TrendsController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::prefix('songs')->group(function () {
-    Route::get('/{id}', [HomeController::class, 'songs_show'])->name('songs.show');
+Route::controller(HomeController::class)->group(function () {
+    Route::get('/', 'index')->name('home');
+    Route::get('/category/{id}', 'categories_show')->name('categories.show');
+    Route::get('/songs/{id}', 'songs_show')->name('songs.show');
+    Route::get('/artist/{id}', 'artists_show')->name('artists.show');
 });
-Route::prefix('artist')->group(function () {
-    Route::get('/{id}', [HomeController::class, 'artists_show'])->name('artists.show');
+
+Route::controller(SearchController::class)->group(function () {
+    Route::get('/search', 'index')->name('search');
 });
-Route::prefix('category')->group(function () {
-    Route::get('/{id}', [HomeController::class, 'categories_show'])->name('categories.show');
+
+Route::controller(VideoController::class)->group(function () {
+    Route::get('/videos', 'index')->name('videos.index');
+    Route::get('/videos/{id}', 'show')->name('videos.show');
 });
-Route::get('/search', [SearchController::class, 'index'])->name('search');
-Route::get('/videos', [VideoController::class, 'index'])->name('videos.index');
-Route::get('/videos/{id}', [VideoController::class, 'show'])->name('videos.show');
-Route::get('/trends', [TrendsController::class, 'index'])->name('trends.index');
+
+Route::controller(TrendsController::class)->group(function () {
+    Route::get('/trends', 'index')->name('trends.index');
+});
+
+Route::get('/about-us', function () {
+    return view('aboutus.aboutus');
+})->name('about.us');
+
+Route::get('/team', function () {
+    return view('aboutus.team');
+})->name('team');
+
+Route::get('/contact', function () {
+    return view('aboutus.contact');
+})->name('contact');

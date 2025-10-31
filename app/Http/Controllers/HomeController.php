@@ -48,19 +48,4 @@ class HomeController extends Controller
             'songs' => $song,
         ]);
     }
-
-    public function aubout_us()
-    {
-        return view('aboutus.aboutus');
-    }
-
-    public function team()
-    {
-        return view('aboutus.team');
-    }
-
-    public function contact()
-    {
-        return view('aboutus.contact');
-    }
 }
