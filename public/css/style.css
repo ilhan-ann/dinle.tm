@@ -41,70 +41,100 @@
     width: 75%;
 }
 
+body {
+    background: #ffff;
+    background: linear-gradient(135deg, #aaaaaa6d, #b7b7b7);
+    background-size: 400% 400%;
+    animation: gradientAnimation 10s ease infinite;
+}
+
 .glass {
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(2px) saturate(180%);
-    border: 1px solid rgba(255, 255, 255, 0.8);
+    position: relative;
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(12px) saturate(200%);
+    -webkit-backdrop-filter: blur(12px) saturate(200%);
+    border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 2rem;
-    box-shadow: 0 8px 32px rgba(31, 38, 135, 0.2),
-        inset 0 4px 20px rgba(255, 255, 255, 0.3);
-    transition: all 0.3s ease;
+    box-shadow: 0 16px 60px rgba(0, 0, 0, 0.15), inset 0 6px 24px rgba(255, 255, 255, 0.1);
+    transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    overflow: hidden;
 }
 
 .glass:hover {
-    background: rgba(255, 255, 255, 0.3);
-    transform: scale(1.05);
+    background: rgba(255, 255, 255, 0.25);
+    transform: scale(1.03);
+    box-shadow: 0 20px 72px rgba(0, 0, 0, 0.25), inset 0 8px 28px rgba(255, 255, 255, 0.12);
 }
 
 .glass::after {
+    content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(255, 255, 255, 0.1);
+    top: -10%;
+    left: -10%;
+    width: 120%;
+    height: 120%;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.12));
     border-radius: 2rem;
-    backdrop-filter: blur(1px);
-    box-shadow: inset -10px -8px 0px -11px rgba(255, 255, 255, 1),
-        inset 0px -9px 0px -8px rgba(255, 255, 255, 1);
+    pointer-events: none;
+    filter: blur(6px);
     opacity: 0.6;
-    z-index: -1;
-    filter: blur(1px) drop-shadow(10px 4px 6px black) brightness(115%);
+    z-index: 0;
+    animation: gradientMove 6s infinite alternate;
+}
+
+.glass::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(120deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 60%);
+    transform: rotate(25deg);
+    pointer-events: none;
+    filter: blur(20px);
+    animation: shine 3s infinite linear;
 }
 
 .glass-nav {
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(2px) saturate(180%);
-    border: 1px solid rgba(255, 255, 255, 0.8);
+    position: relative;
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(10px) saturate(200%);
+    -webkit-backdrop-filter: blur(10px) saturate(200%);
+    border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 2rem;
-    box-shadow: 0 8px 32px rgba(31, 38, 135, 0.2),
-        inset 0 4px 20px rgba(255, 255, 255, 0.3);
+    box-shadow: 0 12px 48px rgba(0, 0, 0, 0.12), inset 0 4px 20px rgba(255, 255, 255, 0.08);
+    overflow: hidden;
 }
 
 .glass-nav::after {
+    content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(255, 255, 255, 0.1);
+    top: -10%;
+    left: -10%;
+    width: 120%;
+    height: 120%;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.12) 100%);
     border-radius: 2rem;
-    backdrop-filter: blur(1px);
-    box-shadow: inset -10px -8px 0px -11px rgba(255, 255, 255, 1),
-        inset 0px -9px 0px -8px rgba(255, 255, 255, 1);
-    opacity: 0.6;
-    z-index: -1;
-    filter: blur(1px) drop-shadow(10px 4px 6px black) brightness(115%);
+    pointer-events: none;
+    filter: blur(6px);
+    opacity: 0.5;
+    z-index: 0;
+    animation: gradientMove 6s infinite alternate;
 }
 
 .btn-glass {
     position: relative;
     color: white;
+    background: rgba(255, 255, 255, 0.05);
     border-radius: 0.75rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
     cursor: pointer;
     transition: all 0.3s ease;
     display: inline-block;
     text-decoration: none;
+    padding: 0.6rem 1.2rem;
+    backdrop-filter: blur(8px) saturate(180%);
 }
 
 .btn-glass::after {
@@ -112,8 +142,21 @@
 }
 
 .btn-glass:hover {
-    background: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.18);
     transform: scale(1.05);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+
+
+@keyframes gradientMove {
+    0% {
+        background-position: 0% 0%;
+    }
+
+    100% {
+        background-position: 100% 100%;
+    }
 }
 
 .card-header {
@@ -193,80 +236,112 @@
 }
 
 .about-section {
-  max-width: 1100px;
-  margin: 2.5rem auto;
-  color: #fff;
-  background: linear-gradient(135deg, rgba(255,255,255,0.14), rgba(255,255,255,0.04));
-  backdrop-filter: blur(20px) saturate(160%);
-  -webkit-backdrop-filter: blur(20px) saturate(160%);
-  border: 1px solid rgba(255,255,255,0.12);
-  box-shadow: 0 12px 40px rgba(2,6,23,0.45), inset 0 2px 10px rgba(255,255,255,0.02);
-  position: relative;
-  overflow: hidden;
+    max-width: 1100px;
+    margin: 2.5rem auto;
+    color: #fff;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.04));
+    backdrop-filter: blur(20px) saturate(160%);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 12px 40px rgba(2, 6, 23, 0.45), inset 0 2px 10px rgba(255, 255, 255, 0.02);
+    position: relative;
+    overflow: hidden;
 }
 
 .waves-bg {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
 }
+
 .wave {
-  position: absolute;
-  left: 0;
-  width: 200%;
-  height: 100%;
-  opacity: 0.12;
-  transform: translate3d(0,0,0);
+    position: absolute;
+    left: 0;
+    width: 200%;
+    height: 100%;
+    opacity: 0.12;
+    transform: translate3d(0, 0, 0);
 }
-.wave-1 { top: -18%; opacity: 0.12; filter: blur(6px); }
-.wave-2 { top: -8%; opacity: 0.08; filter: blur(8px); }
-.wave path { fill: rgba(0,188,212,0.08); }
+
+.wave-1 {
+    top: -18%;
+    opacity: 0.12;
+    filter: blur(6px);
+}
+
+.wave-2 {
+    top: -8%;
+    opacity: 0.08;
+    filter: blur(8px);
+}
+
+.wave path {
+    fill: rgba(0, 188, 212, 0.08);
+}
 
 @keyframes waveMove {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-.wave-1 { animation: waveMove 18s linear infinite; }
-.wave-2 { animation: waveMove 26s linear infinite reverse; }
+    0% {
+        transform: translateX(0);
+    }
 
-.about-section .container { position: relative; z-index: 2; }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+.wave-1 {
+    animation: waveMove 18s linear infinite;
+}
+
+.wave-2 {
+    animation: waveMove 26s linear infinite reverse;
+}
+
+.about-section .container {
+    position: relative;
+    z-index: 2;
+}
 
 .about-title {
-  color: #fff;
-  text-shadow: 0 6px 18px rgba(0,0,0,0.45);
+    color: #fff;
+    text-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
 }
+
 .about-lead {
-  color: rgba(255,255,255,0.92);
+    color: rgba(255, 255, 255, 0.92);
 }
+
 .about-desc {
-  color: rgba(255,255,255,0.75);
-  max-width: 820px;
-  margin: 0 auto 1.25rem;
+    color: rgba(255, 255, 255, 0.75);
+    max-width: 820px;
+    margin: 0 auto 1.25rem;
 }
 
 .about-section .btn-primary {
-  background: linear-gradient(90deg, #00bcd4, #007bff);
-  border: none;
-  box-shadow: 0 8px 24px rgba(0,123,255,0.18);
+    background: linear-gradient(90deg, #00bcd4, #007bff);
+    border: none;
+    box-shadow: 0 8px 24px rgba(0, 123, 255, 0.18);
 }
+
 .about-section .btn-outline-light {
-  border-color: rgba(255,255,255,0.12);
-  color: #fff;
+    border-color: rgba(255, 255, 255, 0.12);
+    color: #fff;
 }
 
 .about-section .about-title,
 .about-section .about-lead,
 .about-section .about-desc,
 .about-section .btn {
-  transform: translateY(8px);
-  opacity: 0;
-  transition: transform 600ms cubic-bezier(.2,.9,.2,1), opacity 600ms ease;
+    transform: translateY(8px);
+    opacity: 0;
+    transition: transform 600ms cubic-bezier(.2, .9, .2, 1), opacity 600ms ease;
 }
+
 .about-section.visible .about-title,
 .about-section.visible .about-lead,
 .about-section.visible .about-desc,
 .about-section.visible .btn {
-  transform: translateY(0);
-  opacity: 1;
+    transform: translateY(0);
+    opacity: 1;
 }

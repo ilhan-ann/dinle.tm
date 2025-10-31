@@ -2,11 +2,11 @@
 
 @section('content')
     <div class="container-lg">
-        <div class="row mb-5">
-            <div class="col-3">
-                @include('layouts.side')
+        <div class="row">
+            <div class="col-3 d-none d-md-block">
+                @include('partials.side')
             </div>
-            <div class="col-9">
+            <div class="col-12 col-md-9">
                 <div class="row row-cols-1 g-3">
                     <section id="banner" class="splide mt-5" aria-label="meals">
                         <div class="splide__track">

@@ -3,7 +3,7 @@
 @section('content')
     <div class="container-lg">
         <div class="row mb-5">
-            <div class="col-3">
+            <div class="col-1 d-none d-md-block">
                 <a href="/" class="btn glass btn-glass text-black rounded-circle"><i class="bi bi-chevron-left"></i></a>
             </div>
             <div class="h3 text-center mt-5 fw-bold">

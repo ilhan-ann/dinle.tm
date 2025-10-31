@@ -3,10 +3,10 @@
 @section('content')
     <div class="container-lg">
         <div class="row mb-5">
-            <div class="col-3">
-                @include('layouts.side')
+            <div class="col-3 d-none d-md-block">
+                @include('partials.side')
             </div>
-            <div class="col-9">
+            <div class="col-12 col-md-9">
 
                 <h2 class="mb-3 text-white">{{ $video->name }}</h2>
                 <small class="text-secondary mb-3 d-block">{{ $video->artist->name }} · <i class="bi bi-eye"></i>

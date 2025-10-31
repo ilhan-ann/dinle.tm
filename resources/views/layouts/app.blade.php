@@ -15,7 +15,7 @@
 </head>
 
 <body>
-    @include('layouts.nav')
-    @include('layouts.player')
+    @include('partials.nav')
+    @include('partials.player')
     @yield('content')
 </body>

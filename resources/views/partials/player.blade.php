@@ -1,39 +1,76 @@
 <div class="container-lg fixed-bottom">
-    <div class="glass-nav px-3 mb-3 rounded-5">
-        <div class="py-3 d-flex flex-column gap-2" id="global-player">
-            <div class="d-flex justify-content-between align-items-center">
-                <div>
+    <div class="glass-nav p-3 mb-3 rounded-5">
+        <div class="d-flex flex-column gap-2" id="global-player">
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
+                <div class="text-center text-md-start mb-2 mb-md-0">
                     <strong id="player-song-name">Player</strong><br>
                     <small id="player-artist-name" class="text-secondary"></small>
                 </div>
-                <div class="d-flex align-items-center gap-3">
-                    <small id="player-current-time">0:00</small>
-                    <span>/</span>
-                    <small id="player-duration">0:00</small>
-                    <div class="rounded-4">
-                        <button id="player-prev-btn" class="btn btn-glass glass text-black rounded-circle">
+                <div class="d-flex flex-column flex-md-row align-items-center gap-2 gap-md-3">
+                    <div class="d-none d-md-block d-flex align-items-center gap-1 justify-content-center">
+                        <small id="player-current-time">0:00</small>
+                        <span>/</span>
+                        <small id="player-duration">0:00</small>
+                    </div>
+                    <div class="d-flex gap-2 justify-content-center">
+                        <button id="player-prev-btn" class="btn btn-glass glass text-black">
                             <i class="bi bi-skip-start-fill"></i>
                         </button>
-                        <button id="player-play-btn" class="btn btn-glass glass text-black rounded-circle">
+                        <button id="player-play-btn" class="btn btn-glass glass text-black">
                             <i class="bi bi-play-fill"></i>
                         </button>
-                        <button id="player-next-btn" class="btn btn-glass glass text-black rounded-circle">
+                        <button id="player-next-btn" class="btn btn-glass glass text-black">
                             <i class="bi bi-skip-end-fill"></i>
                         </button>
                     </div>
                 </div>
             </div>
+            <div class="d-md-none d-flex align-items-center gap-1 justify-content-center">
+                <small id="player-current-time">0:00</small>
+                <span>/</span>
+                <small id="player-duration">0:00</small>
+            </div>
             <input type="range" id="player-progress" min="0" value="0" step="1" class="form-range w-100">
-            <div class="d-flex align-items-center gap-2">
+            <div class="d-flex d-none d-md-block gap-2">
                 <i class="bi bi-volume-down"></i>
                 <input type="range" id="player-volume" min="0" max="1" step="0.01" value="1" class="form-range"
-                    style="width:120px;">
+                    style="width:100px; max-width:120px;">
                 <i class="bi bi-volume-up"></i>
             </div>
             <audio id="player-audio" preload="metadata"></audio>
         </div>
     </div>
+    <div class="d-block d-md-none mb-2">
+    <div class="glass py-2 d-flex justify-content-between">
+        <div class="">
+            <a href="/" class="text-decoration-none text-black p-2 {{ Request::is('/') ? 'glass-nav' : '' }}">
+                <i class="bi bi-house m-2"></i>
+            </a>
+        </div>
+        <div class="">
+            <a href="/videos"
+                class="text-decoration-none text-black p-2 {{ Request::is('videos') ? 'glass-nav' : '' }}">
+                <i class="bi bi-camera-video m-2"></i>
+            </a>
+        </div>
+        <div class="">
+            <a href="/trends"
+                class="text-decoration-none text-black p-2 {{ Request::is('trends') ? 'glass-nav' : '' }}">
+                <i class="bi bi-soundwave m-2"></i>
+            </a>
+        </div>
+        <div>
+            <a href="/search"
+                class="text-decoration-none text-black p-2 {{ Request::is('search') ? 'glass-nav' : '' }}">
+                <i class="bi bi-search m-2"></i>
+            </a>
+        </div>
+    </div>
 </div>
+</div>
+
+
+
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {

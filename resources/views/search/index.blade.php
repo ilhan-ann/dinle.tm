@@ -2,12 +2,12 @@
 
 @section('content')
     <div class="container-lg">
-        <div class="row mb-5">
-            <div class="col-3">
-                @include('layouts.side')
+        <div class="row">
+            <div class="col-3 d-none d-md-block">
+                @include('partials.side')
             </div>
-            <div class="col-9">
-                <form action="{{ route('search') }}" method="get" class="me-3 col-4">
+            <div class="col-12 col-md-9">
+                <form action="{{ route('search') }}" method="get" class="col-12 col-md-5">
                     <label class="form-label" for="q"></label>
                     <input class="form-control glass" type="text" name="q" id="q" placeholder="Search..."
                         value="{{ $f_q ? $f_q : ''}}">
@@ -16,7 +16,7 @@
                         <a href="{{ route('search') }}" class="btn glass btn-glass border text-black ms-2 w-100">Reset</a>
                     </div>
                 </form>
-                <div>
+                <div class="mt-2">
                     {{ $songs->links('pagination::bootstrap-5') }}
                 </div>
                 @foreach ($songs as $song)
