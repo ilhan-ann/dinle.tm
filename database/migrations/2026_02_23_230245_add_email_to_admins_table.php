@@ -6,17 +6,21 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-   public function up(): void
-{
-    Schema::table('admins', function (Blueprint $table) {
-        $table->string('email')->unique();
-    });
-}
+    public function up(): void
+    {
+        Schema::table('admins', function (Blueprint $table) {
+            if (!Schema::hasColumn('admins', 'email')) {
+                $table->string('email')->unique();
+            }
+        });
+    }
 
-public function down(): void
-{
-    Schema::table('admins', function (Blueprint $table) {
-        $table->dropColumn('email');
-    });
-}
+    public function down(): void
+    {
+        Schema::table('admins', function (Blueprint $table) {
+            if (Schema::hasColumn('admins', 'email')) {
+                $table->dropColumn('email');
+            }
+        });
+    }
 };

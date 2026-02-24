@@ -12,37 +12,55 @@
                     <i class="bi bi-arrow-left" style="font-size: 1rem;"></i>
                     Back
                 </button>
-
-                <div class="mb-4 mt-2">
-                    <p class="text-uppercase mb-1" style="color: var(--sp-gray-1); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em;">Artist</p>
-                    <h1 class="fw-black mb-0" style="font-size: clamp(2rem, 6vw, 4rem); letter-spacing: -0.02em;">{{ $artist->name }}</h1>
-                    <p class="mt-2 mb-0" style="color: var(--sp-gray-1); font-size: 0.875rem;">{{ $songs->count() }} {{ Str::plural('song', $songs->count()) }}</p>
+                <div class="mb-4 mt-2 d-flex align-items-center gap-4">
+                    <div style="width: 100px; height: 100px; border-radius: 50%; background: linear-gradient(135deg, #2a2a2a 0%, #3a3a3a 100%); display: flex; align-items: center; justify-content: center; overflow: hidden; flex-shrink: 0;">
+                        @if ($artist->photo_path)
+                            <img src="{{ asset($artist->photo_path) }}" alt="{{ $artist->name }}" style="width: 100%; height: 100%; object-fit: cover;">
+                        @else
+                            <svg viewBox="0 0 24 24" fill="currentColor" style="width: 48px; height: 48px; color: #535353;">
+                                <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/>
+                            </svg>
+                        @endif
+                    </div>
+                    <div>
+                        <p class="text-uppercase mb-1" style="color: var(--sp-gray-1); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em;">Artist</p>
+                        <h1 class="fw-black mb-0" style="font-size: clamp(2rem, 6vw, 4rem); letter-spacing: -0.02em;">{{ $artist->name }}</h1>
+                        <p class="mt-2 mb-0" style="color: var(--sp-gray-1); font-size: 0.875rem;">{{ $songs->count() }} {{ Str::plural('song', $songs->count()) }}</p>
+                    </div>
                 </div>
-
                 <div class="d-flex align-items-center px-3 pb-2 mb-1" style="border-bottom: 1px solid var(--sp-surface-2, #282828);">
                     <div style="width: 1.5rem; flex-shrink: 0;" class="me-3"></div>
+                    <div style="width: 40px; flex-shrink: 0;" class="me-3"></div>
                     <div class="grow" style="font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--sp-gray-1);">Title</div>
                     <div class="d-flex align-items-center gap-4 shrink-0">
                         <span style="font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--sp-gray-1);"><i class="bi bi-people"></i></span>
                         <span style="font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--sp-gray-1); min-width: 2.5rem; text-align: right;"><i class="bi bi-clock"></i></span>
                     </div>
                 </div>
-
                 <div class="d-flex flex-column">
                     @foreach ($songs as $index => $song)
                         <div class="song-row d-flex align-items-center px-3 py-2 rounded-3">
-
                             <div class="song-cell me-3" style="width: 1.5rem; flex-shrink: 0; text-align: center;">
                                 <span class="song-num" style="color: var(--sp-gray-1); font-size: 0.875rem; pointer-events: none;">{{ $index + 1 }}</span>
                                 <button class="select-song-btn song-play-btn btn p-0 border-0"
                                     data-src="{{ asset($song->audio_path) }}"
                                     data-name="{{ $song->name }}"
                                     data-artist="{{ $song->artist->name }}"
+                                    data-cover="{{ $song->cover_path ? asset($song->cover_path) : '' }}"
                                     style="color: #fff; background: transparent; line-height: 1; font-size: 1rem;">
                                     <i class="bi bi-play-fill"></i>
                                 </button>
                             </div>
 
+                            <div class="me-3" style="width: 40px; height: 40px; flex-shrink: 0; border-radius: 4px; overflow: hidden; background: linear-gradient(135deg, #1a3a2a 0%, var(--sp-surface-2) 100%); display: flex; align-items: center; justify-content: center;">
+                                @if ($song->cover_path)
+                                    <img src="{{ asset($song->cover_path) }}" alt="{{ $song->name }}" style="width: 100%; height: 100%; object-fit: cover;">
+                                @else
+                                    <svg viewBox="0 0 24 24" fill="currentColor" style="width: 20px; height: 20px; color: var(--sp-green); opacity: 0.6;">
+                                        <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+                                    </svg>
+                                @endif
+                            </div>
                             <div class="grow overflow-hidden me-3">
                                 <div class="fw-semibold text-truncate song-title" style="font-size: 0.9375rem; color: #fff;">{{ $song->name }}</div>
                                 <a href="{{ route('artists.show', $song->artist->id) }}"
@@ -52,7 +70,6 @@
                                     {{ $song->artist->name }}
                                 </a>
                             </div>
-
                             <div class="d-flex align-items-center gap-4 shrink-0">
                                 <span style="color: var(--sp-gray-1); font-size: 0.8125rem;">
                                     <i class="bi bi-people me-1"></i>{{ number_format($song->listener_count) }}
@@ -60,7 +77,6 @@
                                 <span class="song-duration" data-src="{{ asset($song->audio_path) }}"
                                       style="color: var(--sp-gray-1); font-size: 0.8125rem; min-width: 2.5rem; text-align: right;">—</span>
                             </div>
-
                         </div>
                     @endforeach
                 </div>

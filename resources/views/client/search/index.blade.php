@@ -57,6 +57,7 @@
 
                     <div class="d-flex align-items-center px-3 pb-2 mb-1" style="border-bottom: 1px solid #282828;">
                         <div style="width: 1.5rem; flex-shrink: 0;" class="me-3"></div>
+                        <div style="width: 40px; flex-shrink: 0;" class="me-3"></div>
                         <div class="grow" style="font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #b3b3b3;">Title</div>
                         <div class="d-flex align-items-center gap-4 shrink-0">
                             <span style="font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #b3b3b3;"><i class="bi bi-people"></i></span>
@@ -77,9 +78,20 @@
                                         data-src="{{ asset($song->audio_path) }}"
                                         data-name="{{ $song->name }}"
                                         data-artist="{{ $song->artist->name }}"
+                                        data-cover="{{ $song->cover_path ? asset($song->cover_path) : '' }}"
                                         style="color: #fff; background: transparent; line-height: 1; font-size: 1rem;">
                                         <i class="bi bi-play-fill"></i>
                                     </button>
+                                </div>
+
+                                <div class="me-3" style="width: 40px; height: 40px; flex-shrink: 0; border-radius: 4px; overflow: hidden; background: linear-gradient(135deg, #1a3a2a 0%, var(--sp-surface-2) 100%); display: flex; align-items: center; justify-content: center;">
+                                    @if ($song->cover_path)
+                                        <img src="{{ asset($song->cover_path) }}" alt="{{ $song->name }}" style="width: 100%; height: 100%; object-fit: cover;">
+                                    @else
+                                        <svg viewBox="0 0 24 24" fill="currentColor" style="width: 20px; height: 20px; color: var(--sp-green); opacity: 0.6;">
+                                            <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+                                        </svg>
+                                    @endif
                                 </div>
 
                                 <div class="grow overflow-hidden me-3">

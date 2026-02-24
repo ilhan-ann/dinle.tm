@@ -27,4 +27,21 @@ class ArtistController extends Controller
         Artist::findOrFail($id)->delete();
         return back()->with('success', 'Artist deleted.');
     }
+
+    public function update(Request $request, $id)
+{
+    $request->validate(['name' => 'required|string|max:255']);
+
+    $artist = Artist::findOrFail($id);
+    $artist->name = $request->name;
+
+    if ($request->hasFile('photo')) {
+        $path = $request->file('photo')->store('artists', 'public');
+        $artist->photo_path = 'storage/' . $path;
+    }
+
+    $artist->save();
+
+    return back()->with('success', 'Artist updated.');
+}
 }

@@ -7,12 +7,12 @@
                @include('client.partials.side')
             </div>
             <div class="col-12 col-md-9">
-<button onclick="history.back()" class="btn p-0 mb-3 mt-2 d-flex align-items-center gap-2"
-    style="color: var(--sp-gray-1); font-size: 0.875rem; background: transparent; border: none; cursor: pointer; transition: color 0.15s;"
-    onmouseenter="this.style.color='#fff'" onmouseleave="this.style.color='var(--sp-gray-1)'">
-    <i class="bi bi-arrow-left" style="font-size: 1rem;"></i>
-    Back
-</button>
+                <button onclick="history.back()" class="btn p-0 mb-3 mt-2 d-flex align-items-center gap-2"
+                    style="color: var(--sp-gray-1); font-size: 0.875rem; background: transparent; border: none; cursor: pointer; transition: color 0.15s;"
+                    onmouseenter="this.style.color='#fff'" onmouseleave="this.style.color='var(--sp-gray-1)'">
+                    <i class="bi bi-arrow-left" style="font-size: 1rem;"></i>
+                    Back
+                </button>
 
                 <div class="mb-4 mt-2">
                     <p class="text-uppercase mb-1" style="color: var(--sp-gray-1); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em;">Charts</p>
@@ -22,6 +22,7 @@
 
                 <div class="d-flex align-items-center px-3 pb-2 mb-1" style="border-bottom: 1px solid var(--sp-surface-2, #282828);">
                     <div style="width: 1.5rem; flex-shrink: 0;" class="me-3"></div>
+                    <div style="width: 40px; flex-shrink: 0;" class="me-3"></div>
                     <div class="grow" style="font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--sp-gray-1);">Title</div>
                     <div class="d-flex align-items-center gap-4 shrink-0">
                         <span style="font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--sp-gray-1);"><i class="bi bi-people"></i></span>
@@ -39,9 +40,20 @@
                                     data-src="{{ asset($song->audio_path) }}"
                                     data-name="{{ $song->name }}"
                                     data-artist="{{ $song->artist->name }}"
+                                    data-cover="{{ $song->cover_path ? asset($song->cover_path) : '' }}"
                                     style="color: #fff; background: transparent; line-height: 1; font-size: 1rem;">
                                     <i class="bi bi-play-fill"></i>
                                 </button>
+                            </div>
+
+                            <div class="me-3" style="width: 40px; height: 40px; flex-shrink: 0; border-radius: 4px; overflow: hidden; background: linear-gradient(135deg, #1a3a2a 0%, var(--sp-surface-2) 100%); display: flex; align-items: center; justify-content: center;">
+                                @if ($song->cover_path)
+                                    <img src="{{ asset($song->cover_path) }}" alt="{{ $song->name }}" style="width: 100%; height: 100%; object-fit: cover;">
+                                @else
+                                    <svg viewBox="0 0 24 24" fill="currentColor" style="width: 20px; height: 20px; color: var(--sp-green); opacity: 0.6;">
+                                        <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+                                    </svg>
+                                @endif
                             </div>
 
                             <div class="grow overflow-hidden me-3">
@@ -71,22 +83,15 @@
     </div>
 
     <style>
-        .song-row {
-            transition: background 0.15s ease;
-            cursor: pointer;
-        }
+        .song-row { transition: background 0.15s ease; cursor: pointer; }
         .song-row:hover { background: var(--sp-surface-2, #282828); }
-
         .song-cell .song-num      { display: block; }
         .song-cell .song-play-btn { display: none; }
-
         .song-row:hover .song-num      { display: none; }
         .song-row:hover .song-play-btn { display: block; }
-
         .song-row.active .song-title   { color: #1db954 !important; }
         .song-row.active .song-num     { color: #1db954 !important; display: none; }
         .song-row.active .song-play-btn { display: block; }
-
         .artist-link:hover { color: #fff !important; }
     </style>
 
@@ -96,12 +101,9 @@
                 row.addEventListener('click', (e) => {
                     if (e.target.closest('.artist-link')) return;
                     e.preventDefault();
-
                     const btn = row.querySelector('.select-song-btn');
                     if (!btn) return;
-
                     btn.dispatchEvent(new MouseEvent('click', { bubbles: true }));
-
                     document.querySelectorAll('.song-row').forEach(r => r.classList.remove('active'));
                     row.classList.add('active');
                 });

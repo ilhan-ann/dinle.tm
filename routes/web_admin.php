@@ -26,26 +26,29 @@ Route::prefix('admin')
                     Route::post('',         'store')->name('store');
                     Route::delete('/{id}',  'destroy')->name('destroy');
                 });
-            Route::controller(ArtistController::class)
-                ->prefix('artists')->name('artists.')
-                ->group(function () {
-                    Route::get('',          'index')->name('index');
-                    Route::post('',         'store')->name('store');
-                    Route::delete('/{id}',  'destroy')->name('destroy');
-                });
-            Route::controller(SongController::class)
-                ->prefix('songs')->name('songs.')
-                ->group(function () {
-                    Route::get('',          'index')->name('index');
-                    Route::post('',         'store')->name('store');
-                    Route::delete('/{id}',  'destroy')->name('destroy');
-                });
+           Route::controller(ArtistController::class)
+    ->prefix('artists')->name('artists.')
+    ->group(function () {
+        Route::get('',          'index')->name('index');
+        Route::post('',         'store')->name('store');
+        Route::put('/{id}',     'update')->name('update');
+        Route::delete('/{id}',  'destroy')->name('destroy');
+    });
+Route::controller(SongController::class)
+    ->prefix('songs')->name('songs.')
+    ->group(function () {
+        Route::get('',          'index')->name('index');
+        Route::post('',         'store')->name('store');
+        Route::put('/{id}',     'update')->name('update');
+        Route::delete('/{id}',  'destroy')->name('destroy');
+    });
             Route::controller(VideoController::class)
-                ->prefix('videos')->name('videos.')
-                ->group(function () {
-                    Route::get('',          'index')->name('index');
-                    Route::post('',         'store')->name('store');
-                    Route::delete('/{id}',  'destroy')->name('destroy');
-                });
+    ->prefix('videos')->name('videos.')
+    ->group(function () {
+        Route::get('',          'index')->name('index');
+        Route::post('',         'store')->name('store');
+        Route::put('/{id}',     'update')->name('update');
+        Route::delete('/{id}',  'destroy')->name('destroy');
+    });
         });
     });

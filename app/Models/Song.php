@@ -21,6 +21,7 @@ class Song extends Model
     protected $fillable = [
     'name',
     'audio_path',
+    'cover_path',
     'artist_id',
     'category_id',
     'listener_count',

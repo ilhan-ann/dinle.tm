@@ -42,4 +42,25 @@ class VideoController extends Controller
         Video::findOrFail($id)->delete();
         return back()->with('success', 'Video deleted.');
     }
+
+    public function update(Request $request, $id)
+{
+    $request->validate([
+        'name'      => 'required|string|max:255',
+        'artist_id' => 'required|exists:artists,id',
+    ]);
+
+    $video = Video::findOrFail($id);
+    $video->name      = $request->name;
+    $video->artist_id = $request->artist_id;
+
+    if ($request->hasFile('cover')) {
+        $path = $request->file('cover')->store('covers', 'public');
+        $video->cover_path = 'storage/' . $path;
+    }
+
+    $video->save();
+
+    return back()->with('success', 'Video updated.');
+}
 }
