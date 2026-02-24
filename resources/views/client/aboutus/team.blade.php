@@ -8,25 +8,20 @@
             </div>
             <div class="col-12 col-md-9">
 
-                {{-- Back button --}}
                 <button onclick="history.back()" class="btn p-0 mb-3 mt-2 d-flex align-items-center gap-2"
                     style="color: var(--sp-gray-1); font-size: 0.875rem; background: transparent; border: none; cursor: pointer; transition: color 0.15s;"
                     onmouseenter="this.style.color='#fff'" onmouseleave="this.style.color='var(--sp-gray-1)'">
                     <i class="bi bi-arrow-left" style="font-size: 1rem;"></i>
                     Back
                 </button>
-
-                {{-- Header --}}
                 <div class="mb-5 mt-2">
                     <p class="text-uppercase mb-1" style="color: var(--sp-gray-1); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em;">People</p>
                     <h1 class="fw-black mb-0" style="font-size: clamp(2rem, 6vw, 4rem); letter-spacing: -0.02em;">Our Team</h1>
                     <p class="mt-2 mb-0" style="color: var(--sp-gray-1); font-size: 0.875rem;">The people behind Dinle.tm</p>
                 </div>
 
-                {{-- Team grid --}}
                 <div class="d-flex flex-wrap gap-4">
 
-                    {{-- Member card --}}
                     <div style="width: 180px;">
                         <div style="width: 180px; height: 180px; border-radius: 12px; overflow: hidden; background: var(--sp-surface-2);">
                             <img src="{{ asset('img/ceo.jpg') }}" alt="Ilhan"

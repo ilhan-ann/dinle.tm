@@ -1,9 +1,7 @@
 <div id="sp-player" class="fixed-bottom">
 
-    {{-- DESKTOP only (md+) --}}
     <div id="sp-player-inner">
         <div id="sp-track-info">
-            {{-- Album Art --}}
             <div id="sp-album-art">
                 <svg id="sp-album-placeholder" viewBox="0 0 24 24" fill="currentColor" style="width:28px;height:28px;color:#535353;">
                     <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
@@ -57,11 +55,8 @@
             </div>
         </div>
     </div>
-
-    {{-- MOBILE only (< md) --}}
     <div id="sp-mobile-bar">
         <div id="sp-mob-track">
-            {{-- Mobile Album Art --}}
             <div id="sp-mob-album-art">
                 <svg viewBox="0 0 24 24" fill="currentColor" style="width:20px;height:20px;color:#535353;">
                     <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
@@ -109,7 +104,6 @@
 <style>
 #sp-player { font-family: 'DM Sans', sans-serif; user-select: none; -webkit-user-select: none; }
 
-/* ─── DESKTOP PLAYER ─── */
 #sp-player-inner {
     display: none;
     align-items: center;
@@ -126,7 +120,6 @@
 
 #sp-track-info { flex: 1; min-width: 0; max-width: 300px; display: flex; align-items: center; gap: 10px; }
 
-/* Album Art */
 #sp-album-art {
     width: 56px; height: 56px; border-radius: 6px; flex-shrink: 0;
     background: #282828; display: flex; align-items: center; justify-content: center;
@@ -142,7 +135,6 @@
 #sp-song-name   { font-size: .875rem; font-weight: 600; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 #sp-artist-name { font-size: .75rem; color: #b3b3b3; margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-/* Like button */
 #sp-like { flex-shrink: 0; }
 #sp-like.liked svg path { fill: #1db954; }
 #sp-like.liked { color: #1db954 !important; }
@@ -156,7 +148,6 @@
 
 #sp-right { flex: 1; display: flex; align-items: center; justify-content: flex-end; gap: 6px; max-width: 260px; }
 
-/* ─── BUTTONS ─── */
 .sp-btn {
     background: transparent; border: none; cursor: pointer;
     display: flex; align-items: center; justify-content: center;
@@ -174,7 +165,6 @@
 .sp-btn:not(.sp-btn--play):hover { color: #fff; transform: scale(1.1); }
 .sp-btn--active { color: #1db954 !important; }
 
-/* ─── PROGRESS BAR ─── */
 #sp-progress-row { display: flex; align-items: center; gap: 8px; width: 100%; }
 #sp-current, #sp-duration { font-size: .68rem; color: #b3b3b3; min-width: 34px; font-variant-numeric: tabular-nums; }
 #sp-duration { text-align: right; }
@@ -187,7 +177,6 @@
 #sp-bar-thumb { position: absolute; top: 50%; left: 0%; width: 13px; height: 13px; background: #fff; border-radius: 50%; pointer-events: none; transform: translate(-50%,-50%) scale(0); transition: transform .12s; box-shadow: 0 2px 6px rgba(0,0,0,.4); }
 #sp-bar-wrap:hover #sp-bar-thumb, #sp-bar-wrap.scrubbing #sp-bar-thumb { transform: translate(-50%,-50%) scale(1); }
 
-/* ─── VOLUME ─── */
 #sp-vol-wrap { width: 90px; height: 20px; display: flex; align-items: center; cursor: pointer; touch-action: none; }
 #sp-vol-bg { position: relative; width: 100%; height: 4px; background: #535353; border-radius: 2px; transition: height .12s; }
 #sp-vol-wrap:hover #sp-vol-bg { height: 6px; }
@@ -196,7 +185,6 @@
 #sp-vol-thumb { position: absolute; top: 50%; left: 100%; width: 13px; height: 13px; background: #fff; border-radius: 50%; pointer-events: none; transform: translate(-50%,-50%) scale(0); transition: transform .12s; }
 #sp-vol-wrap:hover #sp-vol-thumb { transform: translate(-50%,-50%) scale(1); }
 
-/* ─── MOBILE PLAYER ─── */
 #sp-mobile-bar { background: #181818; border-top: 1px solid #282828; }
 @media (min-width: 768px) {
     #sp-mobile-bar { display: none; }
@@ -269,7 +257,6 @@ document.addEventListener('DOMContentLoaded', () => {
         songName.textContent = miniSong.textContent   = n;
         artistName.textContent = miniArtist.textContent = a;
 
-        // Album art
         if (cover) {
             albumImg.src = cover;
             albumImg.style.display = 'block';

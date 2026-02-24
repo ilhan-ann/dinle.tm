@@ -7,23 +7,17 @@
                 @include('client.partials.side')
             </div>
             <div class="col-12 col-md-9">
-
-                {{-- Back button --}}
                 <button onclick="history.back()" class="btn p-0 mb-3 mt-2 d-flex align-items-center gap-2"
                     style="color: var(--sp-gray-1); font-size: 0.875rem; background: transparent; border: none; cursor: pointer; transition: color 0.15s;"
                     onmouseenter="this.style.color='#fff'" onmouseleave="this.style.color='var(--sp-gray-1)'">
                     <i class="bi bi-arrow-left" style="font-size: 1rem;"></i>
                     Back
                 </button>
-
-                {{-- Header --}}
                 <div class="mb-5 mt-2">
                     <p class="text-uppercase mb-1" style="color: var(--sp-gray-1); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em;">Get in touch</p>
                     <h1 class="fw-black mb-0" style="font-size: clamp(2rem, 6vw, 4rem); letter-spacing: -0.02em;">Contact Us</h1>
                     <p class="mt-2 mb-0" style="color: var(--sp-gray-1); font-size: 0.875rem;">Have a question or feedback? Reach out — music sounds better together.</p>
                 </div>
-
-                {{-- Form --}}
                 <form action="#" method="POST" style="max-width: 560px;">
                     @csrf
 

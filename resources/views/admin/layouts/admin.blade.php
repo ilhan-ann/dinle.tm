@@ -9,7 +9,6 @@
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
         body { font-family: 'DM Sans', sans-serif; background: #0f0f0f; color: #fff; min-height: 100vh; display: flex; }
 
-        /* ── Sidebar ── */
         #admin-sidebar {
             width: 220px; background: #181818;
             border-right: 1px solid #282828; flex-shrink: 0;
@@ -46,20 +45,16 @@
         .admin-user button:hover { background: #282828; color: #e53e3e; }
         .admin-user i { font-size: 1rem; width: 18px; text-align: center; flex-shrink: 0; }
 
-        /* ── Main ── */
         #admin-main { margin-left: 220px; flex: 1; padding: 2rem; min-height: 100vh; max-width: 100%; overflow-x: hidden; }
 
-        /* ── Cards ── */
         .stat-card { background: #181818; border-radius: 12px; padding: 1.25rem 1.5rem; border: 1px solid #282828; }
         .stat-card .stat-num { font-size: 2rem; font-weight: 900; color: #fff; line-height: 1; }
         .stat-card .stat-label { font-size: 0.8125rem; color: #b3b3b3; margin-top: 4px; }
 
-        /* ── Section box ── */
         .section-box { background: #181818; border-radius: 12px; border: 1px solid #282828; overflow: hidden; margin-bottom: 2rem; }
         .section-box-header { padding: 1rem 1.5rem; border-bottom: 1px solid #282828; font-size: 1rem; font-weight: 700; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; }
         .section-box-body { padding: 1.5rem; }
 
-        /* ── Table ── */
         .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
         .admin-table { width: 100%; border-collapse: collapse; min-width: 400px; }
         .admin-table th { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #b3b3b3; padding: 0.5rem 1rem; border-bottom: 1px solid #282828; text-align: left; white-space: nowrap; }
@@ -67,31 +62,22 @@
         .admin-table tr:hover td { background: #1e1e1e; }
         .admin-table tr:last-child td { border-bottom: none; }
 
-        /* ── Forms ── */
         label { display: block; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: #b3b3b3; margin-bottom: 6px; }
         .admin-input { background: #282828; border: none; border-radius: 8px; padding: 0.625rem 1rem; color: #fff; font-size: 0.875rem; width: 100%; outline: none; transition: background 0.15s; font-family: inherit; }
         .admin-input:focus { background: #333; outline: 2px solid #1db954; outline-offset: -2px; }
         .admin-input option { background: #282828; }
 
-        /* ── Buttons ── */
         .btn-green { background: #1db954; color: #000; border: none; border-radius: 500px; padding: 0.5rem 1.25rem; font-size: 0.875rem; font-weight: 700; cursor: pointer; transition: background 0.15s, transform 0.15s; white-space: nowrap; }
         .btn-green:hover { background: #1ed760; transform: scale(1.03); }
         .btn-del { background: transparent; border: 1px solid #535353; color: #b3b3b3; border-radius: 6px; padding: 0.3rem 0.75rem; font-size: 0.8125rem; cursor: pointer; transition: border-color 0.15s, color 0.15s; }
         .btn-del:hover { border-color: #e53e3e; color: #e53e3e; }
 
-        /* ── Alert ── */
         .alert-success { background: #1a3a2a; color: #1db954; border-radius: 8px; padding: 0.75rem 1rem; font-size: 0.875rem; margin-bottom: 1.5rem; border: 1px solid #1db954; }
 
-        /* ── Search input ── */
         .search-wrap { position: relative; }
         .search-wrap i { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: #b3b3b3; font-size: 0.8rem; pointer-events: none; }
         .search-wrap .admin-input { padding-left: 2rem; width: 220px; font-size: 0.8125rem; }
 
-        /* ══════════════════════════════
-           RESPONSIVE
-        ══════════════════════════════ */
-
-        /* Tablet: collapse sidebar to icons */
         @media (max-width: 900px) {
             #admin-sidebar { width: 64px; padding: 1rem 0.5rem; }
             .admin-logo .logo-full { display: none; }
@@ -103,8 +89,6 @@
             .admin-user a span, .admin-user button span { display: none; }
             #admin-main { margin-left: 64px; padding: 1.25rem; }
         }
-
-        /* Mobile: bottom nav bar */
         @media (max-width: 600px) {
             #admin-sidebar { display: none; }
             #admin-main { margin-left: 0; padding: 1rem; padding-bottom: 5rem; }
@@ -165,7 +149,6 @@
     </div>
 </aside>
 
-{{-- Mobile bottom nav --}}
 <nav id="mobile-nav">
     <a href="{{ route('admin.dashboard') }}" class="{{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
         <i class="bi bi-grid-fill"></i>Home

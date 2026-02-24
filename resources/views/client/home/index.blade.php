@@ -8,7 +8,6 @@
             </div>
             <div class="col-12 col-md-9">
 
-                {{-- Latest Songs --}}
                 <div class="mb-5 mt-3">
                     <div class="mb-3">
                         <p class="text-uppercase mb-1" style="color: var(--sp-gray-1); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em;">New</p>
@@ -44,7 +43,6 @@
                     </div>
                 </div>
 
-                {{-- Artists --}}
                 <div class="mb-5">
                     <p class="text-uppercase mb-1" style="color: var(--sp-gray-1); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em;">Discover</p>
                     <h2 class="fw-black mb-4" style="font-size: 1.5rem; letter-spacing: -0.01em;">Artists</h2>
@@ -70,7 +68,6 @@
                     </div>
                 </div>
 
-                {{-- Categories --}}
                 <div class="mb-2">
                     <p class="text-uppercase mb-1" style="color: var(--sp-gray-1); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em;">Browse</p>
                     <h2 class="fw-black mb-4" style="font-size: 1.5rem; letter-spacing: -0.01em;">Categories</h2>
