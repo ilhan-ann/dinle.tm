@@ -7,12 +7,13 @@
                 @include('client.partials.side')
             </div>
             <div class="col-12 col-md-9">
-<button onclick="history.back()" class="btn p-0 mb-3 mt-2 d-flex align-items-center gap-2"
-    style="color: var(--sp-gray-1); font-size: 0.875rem; background: transparent; border: none; cursor: pointer; transition: color 0.15s;"
-    onmouseenter="this.style.color='#fff'" onmouseleave="this.style.color='var(--sp-gray-1)'">
-    <i class="bi bi-arrow-left" style="font-size: 1rem;"></i>
-    Back
-</button>
+                <button onclick="history.back()" class="btn p-0 mb-3 mt-2 d-flex align-items-center gap-2"
+                    style="color: var(--sp-gray-1); font-size: 0.875rem; background: transparent; border: none; cursor: pointer; transition: color 0.15s;"
+                    onmouseenter="this.style.color='#fff'" onmouseleave="this.style.color='var(--sp-gray-1)'">
+                    <i class="bi bi-arrow-left" style="font-size: 1rem;"></i>
+                    Back
+                </button>
+
                 <div class="mb-4 mt-2">
                     <p class="text-uppercase mb-1" style="color: var(--sp-gray-1); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em;">Discover</p>
                     <h1 class="fw-black mb-0" style="font-size: clamp(2rem, 6vw, 4rem); letter-spacing: -0.02em;">Search</h1>
@@ -51,25 +52,27 @@
 
                 @if($songs->count())
                     <div class="mb-2" style="color: var(--sp-gray-1); font-size: 0.8125rem;">
-                        {{ $songs->total() }} {{ Str::plural('result', $songs->total()) }}
                         @if($f_q) for <strong style="color:#fff;">"{{ $f_q }}"</strong>@endif
                     </div>
 
                     <div class="d-flex align-items-center px-3 pb-2 mb-1" style="border-bottom: 1px solid #282828;">
                         <div style="width: 1.5rem; flex-shrink: 0;" class="me-3"></div>
-                        <div class="flex-grow-1" style="font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #b3b3b3;">Title</div>
-                        <div class="d-flex align-items-center gap-4 flex-shrink-0">
+                        <div class="grow" style="font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #b3b3b3;">Title</div>
+                        <div class="d-flex align-items-center gap-4 shrink-0">
                             <span style="font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #b3b3b3;"><i class="bi bi-people"></i></span>
                             <span style="font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #b3b3b3; min-width: 2.5rem; text-align: right;"><i class="bi bi-clock"></i></span>
                         </div>
                     </div>
 
-                    <div class="d-flex flex-column">
-                        @foreach ($songs as $index => $song)
+                    <div class="d-flex flex-column" id="songs-list">
+                        @php $maxListeners = $songs->max('listener_count'); $popularIndex = 0; @endphp
+                        @foreach ($songs as $song)
+                            @if($song->listener_count >= $maxListeners * 0.3)
+                            @php $popularIndex++ @endphp
                             <div class="song-row d-flex align-items-center px-3 py-2 rounded-3">
 
                                 <div class="song-cell me-3" style="width: 1.5rem; flex-shrink: 0; text-align: center;">
-                                    <span class="song-num" style="color: #b3b3b3; font-size: 0.875rem; pointer-events: none;">{{ $songs->firstItem() + $loop->index }}</span>
+                                    <span class="song-num" style="color: var(--sp-gray-1); font-size: 0.875rem; pointer-events: none;">{{ $popularIndex }}</span>
                                     <button class="select-song-btn song-play-btn btn p-0 border-0"
                                         data-src="{{ asset($song->audio_path) }}"
                                         data-name="{{ $song->name }}"
@@ -79,30 +82,27 @@
                                     </button>
                                 </div>
 
-                                <div class="flex-grow-1 overflow-hidden me-3">
+                                <div class="grow overflow-hidden me-3">
                                     <div class="fw-semibold text-truncate song-title" style="font-size: 0.9375rem; color: #fff;">{{ $song->name }}</div>
                                     <a href="{{ route('artists.show', $song->artist->id) }}"
                                        class="text-decoration-none artist-link text-truncate d-block"
-                                       style="font-size: 0.8125rem; color: #b3b3b3;"
+                                       style="font-size: 0.8125rem; color: var(--sp-gray-1);"
                                        onclick="event.stopPropagation()">
                                         {{ $song->artist->name }}
                                     </a>
                                 </div>
 
-                                <div class="d-flex align-items-center gap-4 flex-shrink-0">
-                                    <span style="color: #b3b3b3; font-size: 0.8125rem;">
+                                <div class="d-flex align-items-center gap-4 shrink-0">
+                                    <span style="color: var(--sp-gray-1); font-size: 0.8125rem;">
                                         <i class="bi bi-people me-1"></i>{{ number_format($song->listener_count) }}
                                     </span>
                                     <span class="song-duration" data-src="{{ asset($song->audio_path) }}"
-                                          style="color: #b3b3b3; font-size: 0.8125rem; min-width: 2.5rem; text-align: right;">—</span>
+                                          style="color: var(--sp-gray-1); font-size: 0.8125rem; min-width: 2.5rem; text-align: right;">—</span>
                                 </div>
 
                             </div>
+                            @endif
                         @endforeach
-                    </div>
-
-                    <div class="mt-3">
-                        {{ $songs->appends(['q' => $f_q])->links('pagination::bootstrap-5') }}
                     </div>
 
                 @else
@@ -120,32 +120,16 @@
     </div>
 
     <style>
-        .song-row {
-            transition: background 0.15s ease;
-            cursor: pointer;
-        }
-        .song-row:hover { background: #282828; }
-
+        .song-row { transition: background 0.15s ease; cursor: pointer; }
+        .song-row:hover { background: var(--sp-surface-2, #282828); }
         .song-cell .song-num      { display: block; }
         .song-cell .song-play-btn { display: none; }
-
         .song-row:hover .song-num      { display: none; }
         .song-row:hover .song-play-btn { display: block; }
-
         .song-row.active .song-title    { color: #1db954 !important; }
-        .song-row.active .song-num      { color: #1db954 !important; display: none; }
+        .song-row.active .song-num      { display: none; }
         .song-row.active .song-play-btn { display: block; }
-
         .artist-link:hover { color: #fff !important; }
-
-        /* Pagination */
-        .pagination .page-link {
-            background: #282828; border-color: transparent;
-            color: #b3b3b3; border-radius: 4px;
-        }
-        .pagination .page-link:hover { background: #3e3e3e; color: #fff; }
-        .pagination .page-item.active .page-link { background: #fff; color: #000; border-color: transparent; }
-        .pagination .page-item.disabled .page-link { background: #181818; color: #535353; }
     </style>
 
     <script>

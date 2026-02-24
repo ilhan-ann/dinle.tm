@@ -22,8 +22,8 @@
 
                 <div class="d-flex align-items-center px-3 pb-2 mb-1" style="border-bottom: 1px solid var(--sp-surface-2, #282828);">
                     <div style="width: 1.5rem; flex-shrink: 0;" class="me-3"></div>
-                    <div class="flex-grow-1" style="font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--sp-gray-1);">Title</div>
-                    <div class="d-flex align-items-center gap-4 flex-shrink-0">
+                    <div class="grow" style="font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--sp-gray-1);">Title</div>
+                    <div class="d-flex align-items-center gap-4 shrink-0">
                         <span style="font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--sp-gray-1);"><i class="bi bi-people"></i></span>
                         <span style="font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--sp-gray-1); min-width: 2.5rem; text-align: right;"><i class="bi bi-clock"></i></span>
                     </div>
@@ -44,7 +44,7 @@
                                 </button>
                             </div>
 
-                            <div class="flex-grow-1 overflow-hidden me-3">
+                            <div class="grow overflow-hidden me-3">
                                 <div class="fw-semibold text-truncate song-title" style="font-size: 0.9375rem; color: #fff;">{{ $song->name }}</div>
                                 <a href="{{ route('artists.show', $song->artist->id) }}"
                                    class="text-decoration-none artist-link text-truncate d-block"
@@ -54,7 +54,7 @@
                                 </a>
                             </div>
 
-                            <div class="d-flex align-items-center gap-4 flex-shrink-0">
+                            <div class="d-flex align-items-center gap-4 shrink-0">
                                 <span style="color: var(--sp-gray-1); font-size: 0.8125rem;">
                                     <i class="bi bi-people me-1"></i>{{ number_format($song->listener_count) }}
                                 </span>

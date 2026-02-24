@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Artist extends Model
 {
+    protected $fillable = ['name', 'image'];
+
     public function songs(): HasMany 
     {
         return $this->hasMany(Song::class);

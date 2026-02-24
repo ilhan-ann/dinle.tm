@@ -3,6 +3,13 @@
     {{-- DESKTOP only (md+) --}}
     <div id="sp-player-inner">
         <div id="sp-track-info">
+            {{-- Album Art --}}
+            <div id="sp-album-art">
+                <svg id="sp-album-placeholder" viewBox="0 0 24 24" fill="currentColor" style="width:28px;height:28px;color:#535353;">
+                    <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+                </svg>
+                <img id="sp-album-img" src="" alt="" style="display:none;width:100%;height:100%;object-fit:cover;">
+            </div>
             <div id="sp-meta">
                 <div id="sp-song-name">Select a track</div>
                 <div id="sp-artist-name">—</div>
@@ -54,6 +61,13 @@
     {{-- MOBILE only (< md) --}}
     <div id="sp-mobile-bar">
         <div id="sp-mob-track">
+            {{-- Mobile Album Art --}}
+            <div id="sp-mob-album-art">
+                <svg viewBox="0 0 24 24" fill="currentColor" style="width:20px;height:20px;color:#535353;">
+                    <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+                </svg>
+                <img id="sp-mob-album-img" src="" alt="" style="display:none;width:100%;height:100%;object-fit:cover;">
+            </div>
             <div id="sp-mob-info">
                 <div id="sp-mini-song">Select a track</div>
                 <div id="sp-mini-artist">—</div>
@@ -97,7 +111,7 @@
 
 /* ─── DESKTOP PLAYER ─── */
 #sp-player-inner {
-    display: none; /* hidden on mobile */
+    display: none;
     align-items: center;
     justify-content: space-between;
     gap: 1rem;
@@ -110,9 +124,28 @@
     #sp-player-inner { display: flex; }
 }
 
-#sp-track-info { flex: 1; min-width: 0; max-width: 260px; }
+#sp-track-info { flex: 1; min-width: 0; max-width: 300px; display: flex; align-items: center; gap: 10px; }
+
+/* Album Art */
+#sp-album-art {
+    width: 56px; height: 56px; border-radius: 6px; flex-shrink: 0;
+    background: #282828; display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+}
+#sp-mob-album-art {
+    width: 38px; height: 38px; border-radius: 4px; flex-shrink: 0;
+    background: #282828; display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+}
+
+#sp-meta { min-width: 0; flex: 1; }
 #sp-song-name   { font-size: .875rem; font-weight: 600; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 #sp-artist-name { font-size: .75rem; color: #b3b3b3; margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* Like button */
+#sp-like { flex-shrink: 0; }
+#sp-like.liked svg path { fill: #1db954; }
+#sp-like.liked { color: #1db954 !important; }
 
 #sp-center {
     display: flex; flex-direction: column; align-items: center; gap: 6px;
@@ -166,7 +199,7 @@
 /* ─── MOBILE PLAYER ─── */
 #sp-mobile-bar { background: #181818; border-top: 1px solid #282828; }
 @media (min-width: 768px) {
-    #sp-mobile-bar { display: none; } /* hidden on desktop */
+    #sp-mobile-bar { display: none; }
 }
 
 #sp-mob-track { display: flex; align-items: center; padding: .625rem 1rem .3rem; gap: .75rem; }
@@ -206,8 +239,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const barWrap     = $('sp-bar-wrap'),           barFill      = $('sp-bar-fill'),       barThumb     = $('sp-bar-thumb');
     const miniBarWrap = $('sp-mini-bar-wrap'),      miniBarFill  = $('sp-mini-bar-fill'),   miniBarThumb = $('sp-mini-bar-thumb');
     const volWrap     = $('sp-vol-wrap'),           volFill      = $('sp-vol-fill'),        volThumb     = $('sp-vol-thumb');
+    const albumImg    = $('sp-album-img'),          albumPlaceholder = $('sp-album-placeholder');
+    const mobAlbumImg = $('sp-mob-album-img');
+    const likeBtn     = $('sp-like');
 
     let playlist = [], idx = -1, shuffleOn = false, repeatOn = false;
+    let likedSongs = new Set(JSON.parse(localStorage.getItem('liked') || '[]'));
 
     const fmt = s => (!isFinite(s)||isNaN(s)) ? '0:00' : `${Math.floor(s/60)}:${(Math.floor(s%60)+'').padStart(2,'0')}`;
     const cx  = e => e.touches ? e.touches[0].clientX : e.clientX;
@@ -228,9 +265,29 @@ document.addEventListener('DOMContentLoaded', () => {
         mobIconPlay.style.display  = on ? 'none'  : 'block';
         mobIconPause.style.display = on ? 'block' : 'none';
     }
-    function setMeta(n, a) {
+    function setMeta(n, a, cover) {
         songName.textContent = miniSong.textContent   = n;
         artistName.textContent = miniArtist.textContent = a;
+
+        // Album art
+        if (cover) {
+            albumImg.src = cover;
+            albumImg.style.display = 'block';
+            albumPlaceholder.style.display = 'none';
+            mobAlbumImg.src = cover;
+            mobAlbumImg.style.display = 'block';
+        } else {
+            albumImg.style.display = 'none';
+            albumPlaceholder.style.display = 'block';
+            mobAlbumImg.style.display = 'none';
+        }
+    }
+    function updateLikeBtn(src) {
+        if (likedSongs.has(src)) {
+            likeBtn.classList.add('liked');
+        } else {
+            likeBtn.classList.remove('liked');
+        }
     }
     function resetBtns() {
         document.querySelectorAll('.select-song-btn').forEach(b => b.innerHTML = '<i class="bi bi-play-fill"></i>');
@@ -240,14 +297,16 @@ document.addEventListener('DOMContentLoaded', () => {
         resetBtns(); idx = i;
         const t = playlist[i];
         audio.src = t.src;
-        setMeta(t.name, t.artist);
+        setMeta(t.name, t.artist, t.cover || null);
+        updateLikeBtn(t.src);
         syncProgress(0, 0);
         durationEl.textContent = mobDurEl.textContent = '0:00';
         audio.play().then(() => { setPlaying(true); t.btn.innerHTML = '<i class="bi bi-pause-fill"></i>'; }).catch(e => console.warn(e));
     }
 
     playlist = Array.from(document.querySelectorAll('.select-song-btn')).map(btn => ({
-        src: btn.dataset.src, name: btn.dataset.name, artist: btn.dataset.artist, btn
+        src: btn.dataset.src, name: btn.dataset.name, artist: btn.dataset.artist,
+        cover: btn.dataset.cover || null, btn
     }));
     playlist.forEach((t, i) => {
         t.btn.addEventListener('click', () => {
@@ -257,6 +316,8 @@ document.addEventListener('DOMContentLoaded', () => {
             } else { loadTrack(i); }
         });
     });
+
+
 
     function togglePlay() {
         if (idx < 0 && playlist.length) { loadTrack(0); return; }
@@ -289,7 +350,6 @@ document.addEventListener('DOMContentLoaded', () => {
         setPlaying(false); resetBtns(); goNext();
     });
 
-    // ─ Scrubber factory ─
     function makeScrubber(wrap, onPct) {
         const calc = e => {
             const r = wrap.getBoundingClientRect();

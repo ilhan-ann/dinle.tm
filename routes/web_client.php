@@ -37,3 +37,11 @@ Route::get('/team', function () {
 Route::get('/contact', function () {
     return view('client.aboutus.contact');
 })->name('contact');
+
+Route::controller(HomeController::class)->group(function () {
+    Route::get('/', 'index')->name('home');
+    Route::get('/category/{id}', 'categories_show')->name('categories.show');
+    Route::get('/songs/{id}', 'songs_show')->name('songs.show');
+    Route::get('/artist/{id}', 'artists_show')->name('artists.show');
+    Route::post('/songs/{id}/listen', 'increment_listener')->name('songs.listen');
+});

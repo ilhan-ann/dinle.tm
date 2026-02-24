@@ -19,12 +19,11 @@ class Song extends Model
     }
 
     protected $fillable = [
-        'name',
-        'artist',
-        'audio_path',
-        'artist_id',
-        'category_id',
-        'listener_count',
-    ];
+    'name',
+    'audio_path',
+    'artist_id',
+    'category_id',
+    'listener_count',
+];
 
 }

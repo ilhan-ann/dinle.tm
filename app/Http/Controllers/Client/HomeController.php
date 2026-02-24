@@ -10,16 +10,18 @@ use App\Models\Song;
 
 class HomeController extends Controller
 {
-    public function index()
-    {
-        $categories  = Category::withCount('songs')->get();
-        $latestSongs = Song::with('artist')->latest()->take(6)->get();
+   public function index()
+{
+    $categories  = Category::withCount('songs')->get();
+    $latestSongs = Song::with('artist')->latest()->take(6)->get();
+    $artists     = Artist::withCount('songs')->get();
 
-        return view('client.home.index')->with([
-            'categories'  => $categories,
-            'latestSongs' => $latestSongs,
-        ]);
-    }
+    return view('client.home.index')->with([
+        'categories'  => $categories,
+        'latestSongs' => $latestSongs,
+        'artists'     => $artists,
+    ]);
+}
 
     public function categories_show($id)
     {
@@ -51,4 +53,11 @@ class HomeController extends Controller
             'songs'  => $songs,
         ]);
     }
+
+    public function increment_listener($id)
+{
+    $song = Song::findOrFail($id);
+    $song->increment('listener_count');
+    return response()->json(['listener_count' => $song->listener_count]);
+}
 }

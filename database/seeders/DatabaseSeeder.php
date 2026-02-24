@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\User;
 use App\Models\Video;
 use App\Models\Song;
+use App\Models\Admin;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -26,5 +27,6 @@ class DatabaseSeeder extends Seeder
         $this->call(ArtistSeeder::class);    
         $this->call(SongSeeder::class);
         $this->call(VideoSeeder::class);
+        $this->call(AdminSeeder::class);
     }
 }

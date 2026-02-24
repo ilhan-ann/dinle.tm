@@ -14,10 +14,19 @@ class CategorySeeder extends Seeder
     public function run(): void
     {
         $categories = [
-            'Turkmen',
-            'Russian',
-            'Foreign',
-        ];
+    'Turkmen',
+    'Russian',
+    'Foreign',
+    'Hip-Hop',
+    'R&B',
+    'Pop',
+    'Rock',
+    'Electronic',
+    'Jazz',
+    'Classical',
+    'Lo-fi',
+    'Indie',
+];
 
         foreach ($categories as $category) {
             Category::create(['name' => $category]);

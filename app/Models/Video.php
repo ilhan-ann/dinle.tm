@@ -4,10 +4,17 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Video extends Model
 {
+    protected $fillable = [
+        'name',
+        'video_path',
+        'artist_id',
+        'category_id',
+        'view_count',
+    ];
+
     public function artist(): BelongsTo
     {
         return $this->belongsTo(Artist::class);

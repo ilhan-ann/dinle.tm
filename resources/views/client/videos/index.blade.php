@@ -23,8 +23,8 @@
                 {{-- Header --}}
                 <div class="d-flex align-items-center px-3 pb-2 mb-1" style="border-bottom: 1px solid var(--sp-surface-2, #282828);">
                     <div style="width: 1.5rem; flex-shrink: 0;" class="me-3"></div>
-                    <div class="flex-grow-1" style="font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--sp-gray-1);">Title</div>
-                    <div class="flex-shrink-0">
+                    <div class="grow" style="font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--sp-gray-1);">Title</div>
+                    <div class="shrink-0">
                         <span style="font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--sp-gray-1);"><i class="bi bi-eye"></i></span>
                     </div>
                 </div>
@@ -41,8 +41,8 @@
                                 </div>
 
                                 {{-- Thumbnail + Title + Artist --}}
-                                <div class="d-flex align-items-center gap-3 flex-grow-1 overflow-hidden me-3">
-                                    <div class="flex-shrink-0" style="width: 64px; height: 36px; border-radius: 6px; overflow: hidden; background: var(--sp-surface-2);">
+                                <div class="d-flex align-items-center gap-3 grow overflow-hidden me-3">
+                                    <div class="shrink-0" style="width: 64px; height: 36px; border-radius: 6px; overflow: hidden; background: var(--sp-surface-2);">
                                         <video src="{{ asset($video->video_path) }}" style="width: 100%; height: 100%; object-fit: cover;" muted preload="metadata"></video>
                                     </div>
                                     <div class="overflow-hidden">
@@ -57,7 +57,7 @@
                                 </div>
 
                                 {{-- Views --}}
-                                <div class="flex-shrink-0">
+                                <div class="shrink-0">
                                     <span style="color: var(--sp-gray-1); font-size: 0.8125rem;">
                                         <i class="bi bi-eye me-1"></i>{{ number_format($video->view_count) }}
                                     </span>
