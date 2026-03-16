@@ -137,7 +137,7 @@
                 card.addEventListener('click', (e) => {
                     if (e.target.closest('a')) return;
                     const btn = card.querySelector('.select-song-btn');
-                    if (btn) btn.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+                    if (btn) btn.dispatchEvent(new MouseEvent('click', { bubbles: false }));
                 });
             });
             document.querySelectorAll('.latest-scroll').forEach(slider => {

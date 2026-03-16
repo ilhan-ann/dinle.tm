@@ -35,12 +35,12 @@
 
                     @php
                     $fakeTeam = [
-                        ["name" => "Hallmyrat",  "role" => "Bruh"],
+                        ["name" => "Halmyrat",  "role" => "Bruh"],
                         ["name" => "Aysha",   "role" => "Head of Design"],
                         ["name" => "Serdar",  "role" => "Lead Developer"],
-                        ["name" => "Gulshat", "role" => "Marketing Manager"],
+                        ["name" => "Yazberdi", "role" => "Marketing Manager"],
                         ["name" => "Oraz",    "role" => "Audio Engineer"],
-                        ["name" => "Maral",   "role" => "Content Manager"],
+                        ["name" => "Yazberdi",   "role" => "Content Manager"],
                     ];
                     @endphp
 

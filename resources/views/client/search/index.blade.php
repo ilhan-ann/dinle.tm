@@ -152,7 +152,7 @@
                     e.preventDefault();
                     const btn = row.querySelector('.select-song-btn');
                     if (!btn) return;
-                    btn.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+                    btn.dispatchEvent(new MouseEvent('click', { bubbles: false }));
                     document.querySelectorAll('.song-row').forEach(r => r.classList.remove('active'));
                     row.classList.add('active');
                 });

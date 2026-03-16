@@ -29,7 +29,7 @@
 <body>
     @include('client.partials.nav')
     @include('client.partials.player')
-    <div class="content-wrapper">
+    <div class="content-wrapper" id="sp-content">
         @yield('content')
     </div>
     @include('client.partials.footer')
